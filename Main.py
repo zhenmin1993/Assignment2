@@ -169,6 +169,7 @@ def Run_kNN():
 
             cluster_num = int(var_ClusterNumber.get())
 
+            global ClassificationDict
             ClassificationDict = dict()
             for item in range(cluster_num):
                 ClassificationDict[item] = list()
@@ -186,10 +187,6 @@ def Run_kNN():
                 ClassificationDict[one_Classification].append(TimeList_valid[iter_valid])
 
 
-            ClassName = {0: 'XX', 1:'YY', 2:'ZZ', 3:'MM'}
-
-            output_kNN(ClassificationDict, ClassName)
-
 
             Message = 'kNN Classification Succeed!'
             var_kNNCheck.set(Message)
@@ -197,6 +194,38 @@ def Run_kNN():
             Stat_Para_kNNCheck = {'bd':1,'anchor':W, 'fg':'#228B22'}
             kNNCheckStructStatus = {'row':17, 'sticky':N+E+S+W, 'columnspan':3, 'column':0}
             win.AddStatus(Stat_Para_kNNCheck, kNNCheckStructStatus, var_kNNCheck.get())
+            win.root.update()
+
+            Label_Message = None
+            Lab_Para_Bus = {'bg':None, 'fg':'white'}
+            BusStructLab = {'row':1,'columnspan':10, 'sticky':N+E+S+W, 'rowspan':15, 'column':6}
+            win.AddLabel(Label_Message , Lab_Para_Bus, BusStructLab)
+
+            Lab_Para_Bus_Title = {'bg':'grey60', 'fg':'black'}
+            BusStructLabTitle = {'row':0,'columnspan':10, 'sticky':N+E+S+W, 'rowspan':1, 'column':6}
+            win.AddLabel('Please Input the Class Name Below' , Lab_Para_Bus_Title, BusStructLabTitle)
+
+            global class_name_list
+            class_name_list = list()
+            column_number = 6
+            for item in range(cluster_num):
+                var_class_name=StringVar()
+                var_class_name.set(item)
+                class_name_list.append(var_class_name)
+
+
+                Entr_class_name = {'off':400,'on':300, 'show':None}
+                class_name_StructEntr = {'row':2, 'column':column_number,'sticky':N+E+S+W}
+                win.AddEntry(var_class_name, Entr_class_name , class_name_StructEntr)
+
+                Lab_Para_class_name = {'bg':None, 'fg':'black'}
+                class_nameStructLab = {'row':1,'columnspan':1, 'sticky':N+E+S+W, 'rowspan':1, 'column':column_number}
+                win.AddLabel('Name of Class'+str(item)+':' , Lab_Para_class_name, class_nameStructLab )
+
+                column_number = column_number + 1
+
+            ClassNameButt = {'row':3,'column':column_number -1 ,'padx':4,'pady':1, 'columnspan':1}
+            win.AddButton('Confirm', output_kNN, ClassNameButt)
             win.root.update()
     
     except:
@@ -210,6 +239,7 @@ def Run_kNN():
             win.root.update()
 
 
+
 #Define the ExitButtonFunction
 def ExitButtonFunc():
     answer = messagebox.askquestion('Computer Application', 'Are you sure to EXIT?')
@@ -221,22 +251,20 @@ def ExitButtonFunc():
 
 
 #The function to output kNN results
-def output_kNN(ClassDict, ClassName):
-    row_number = 2
-    Label_Message = None
-    Lab_Para_Bus = {'bg':None, 'fg':'white'}
-    BusStructLab = {'row':1,'columnspan':10, 'sticky':N+E+S+W, 'rowspan':15, 'column':6}
-    win.AddLabel(Label_Message , Lab_Para_Bus, BusStructLab)
+def output_kNN():
+    ClassName = dict()
+    for iter_name in range(len(ClassificationDict)):
+        ClassName[iter_name] = class_name_list[iter_name].get()
 
-    for key_kNN, value_kNN in ClassDict.items():
-        #row_number = 1
+    row_number = 4
+    for key_kNN, value_kNN in ClassificationDict.items():
         column_number = 6
         new_column_number = 0
         Lab_Para_Class_Name = {'bg':'grey', 'fg':'black'}
         Class_NameStructLab = {'row':row_number,'columnspan':7, 'sticky':N+E+S+W, 'rowspan':1, 'column':column_number}
         win.AddLabel(ClassName[key_kNN], Lab_Para_Class_Name, Class_NameStructLab)
         for value in value_kNN:
-            if new_column_number == 7:
+            if new_column_number == 5:
                 row_number = row_number + 1
                 new_column_number = 0
                 column_number = 6
@@ -246,7 +274,12 @@ def output_kNN(ClassDict, ClassName):
             new_column_number = new_column_number + 1
             column_number = column_number + 1
 
-        row_number = row_number + 3
+        row_number = row_number + 2
+
+    Lab_Para_Bus_Title = {'bg':'grey60', 'fg':'black'}
+    BusStructLabTitle = {'row':0,'columnspan':10, 'sticky':N+E+S+W, 'rowspan':1, 'column':6}
+    win.AddLabel('kNN Classification on Validation Set' , Lab_Para_Bus_Title, BusStructLabTitle)
+    win.root.update()
 
 
 
@@ -450,7 +483,8 @@ Stat_Para_kNNCheck = {'bd':1,'anchor':W, 'fg':'black'}
 kNNCheckStructStatus = {'row':17, 'sticky':N+E+S+W, 'columnspan':3, 'column':0}
 win.AddStatus(Stat_Para_kNNCheck, kNNCheckStructStatus, var_kNNCheck.get())
 
-
+ClassNameButt = {'row':3,'column':10,'padx':4,'pady':1, 'columnspan':1}
+win.AddButton('Confirm', output_kNN, ClassNameButt)
 
 
 

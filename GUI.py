@@ -10,6 +10,8 @@ class MyWindow():
 
     def __init__(self):
         self.root = tk.Tk()
+        self.root.maxsize(1500, 1200)  
+        self.root.minsize(600, 400)
 
 
     def DestroySelf(self):
