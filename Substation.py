@@ -35,10 +35,41 @@ class Substation():
     def VoltageAngleList(self, time_list):
         self.VoltageList = list()
         self.AngleList = list()
+        self.puAngleList = list()
         for time in time_list:
             (angle, voltage) = self.ReadVoltageAngle(time)
             self.VoltageList.append(voltage)
             self.AngleList.append(angle)
         self.conn.commit()
+        #print(self.VoltageList)
+        #print(self.AngleList)
+        self.NormalVoltageList = self.FeatureScaling(self.VoltageList)
+        self.NormalAngleList = self.FeatureScaling(self.AngleList)
+        #print(self.NormalAngleList)
+
+    def FeatureScaling(self,one_list):
+        ValueSum = 0
+        ValueNum = 0
+        for item in one_list:
+            ValueSum = ValueSum + item
+            ValueNum = ValueNum + 1
+
+        ValueAverage = ValueSum/ValueNum
+
+        normalisedList = list()
+
+        if max(one_list) != min(one_list):
+            for item in one_list:
+                one_value = (item - ValueAverage)/(max(one_list)-min(one_list))
+                normalisedList.append(one_value)
+
+        if max(one_list) == min(one_list):
+            for item in one_list:
+                normalisedList.append(item)
+            #print(one_value)
+        return normalisedList
+
+
+
 
 

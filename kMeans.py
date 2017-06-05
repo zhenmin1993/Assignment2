@@ -17,12 +17,15 @@ class kMeans():
         assign_point_list = list()
 
         for iter_traning in range(self.TE_num):
+            original_coord = list()
             coord = list()
             for SubstationInstance in self.SubstationInstanceList:
-                coord.append(SubstationInstance.VoltageList[iter_traning])
-                coord.append(SubstationInstance.AngleList[iter_traning])
+                original_coord.append(SubstationInstance.VoltageList[iter_traning])
+                original_coord.append(SubstationInstance.AngleList[iter_traning])
+                coord.append(SubstationInstance.NormalVoltageList[iter_traning])
+                coord.append(SubstationInstance.NormalAngleList[iter_traning])
 
-            oneExample = TrainingExample(coord)
+            oneExample = TrainingExample(coord, original_coord)
             assign_point_list.append(oneExample)
         return assign_point_list
 

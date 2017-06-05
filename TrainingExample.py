@@ -2,9 +2,10 @@ import math
 import copy
 
 class TrainingExample():
-    def __init__(self, coordinate):
+    def __init__(self, coordinate, original_coordinate):
         self.coordinate = coordinate
         self.inClass = 0
+        self.original_coordinate = original_coordinate
 
 
     def change_Class(self,new_class):

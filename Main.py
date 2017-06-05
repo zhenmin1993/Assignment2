@@ -129,14 +129,17 @@ def Run_kMeans():
                     global assign_point_list
                     #cluster_num = int(var_ClusterNumber.get())
                     assign_point_list = kMeans(cluster_num, TrainingData.SubstationInstanceList, TrainingExample_num).kMean_Algorithm()
-                    coordList = list() 
+                    coordList = list()
+                    original_coordList = list() 
                     ClassList = list()
                     SubstationNameList = TrainingData.SubstationName_List
                     for example in assign_point_list:
                         coordList.append(example.coordinate)
+                        original_coordList.append(example.original_coordinate)
                         ClassList.append(example.inClass)
+                    #print(coordList)
 
-                    ExcelFile = OutputExcel(coordList, ClassList, SubstationNameList)
+                    ExcelFile = OutputExcel(coordList, original_coordList, ClassList, SubstationNameList)
                     ExcelFile.WriteFile()
 
                     Message = 'kMeans Clustering Succeed!'
@@ -177,8 +180,8 @@ def Run_kNN():
             for iter_valid in range(len(TimeList_valid)):
                 coord_valid = list()
                 for SubstationInstance in  ValidateSet.SubstationInstanceList:
-                    coord_valid.append(SubstationInstance.VoltageList[iter_valid])
-                    coord_valid.append(SubstationInstance.AngleList[iter_valid])
+                    coord_valid.append(SubstationInstance.NormalVoltageList[iter_valid])
+                    coord_valid.append(SubstationInstance.NormalAngleList[iter_valid])
 
 
                 one_Validation = kNN(assign_point_list,coord_valid)
