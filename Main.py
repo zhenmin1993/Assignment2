@@ -182,6 +182,7 @@ def Run_kNN():
                 for SubstationInstance in  ValidateSet.SubstationInstanceList:
                     coord_valid.append(SubstationInstance.NormalVoltageList[iter_valid])
                     coord_valid.append(SubstationInstance.NormalAngleList[iter_valid])
+                #print(coord_valid)
 
 
                 one_Validation = kNN(assign_point_list,coord_valid)

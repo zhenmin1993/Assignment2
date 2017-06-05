@@ -39,7 +39,7 @@ class Substation():
         for time in time_list:
             (angle, voltage) = self.ReadVoltageAngle(time)
             self.VoltageList.append(voltage)
-            self.AngleList.append(angle)
+            self.AngleList.append(math.radians(angle))
         self.conn.commit()
         #print(self.VoltageList)
         #print(self.AngleList)
@@ -60,7 +60,7 @@ class Substation():
 
         if max(one_list) != min(one_list):
             for item in one_list:
-                one_value = (item - ValueAverage)/(max(one_list)-min(one_list))
+                one_value = (abs(item - ValueAverage))/(max(one_list)-min(one_list))
                 normalisedList.append(one_value)
 
         if max(one_list) == min(one_list):
