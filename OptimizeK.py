@@ -11,7 +11,6 @@ class OptimizeK():
         self.TE_num = TrainingExample_num
 
 
-        #self.assign_point_list = kMeans(cluster_num, data_list).kMean_Algorithm()
 
     def kMeans_with_different_k(self):
         self.assign_point_list_dict = dict()

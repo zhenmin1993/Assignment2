@@ -18,7 +18,6 @@ class DataRead():
             self.SubstationName_List.append(SubstationNameID['name'])
             self.SubstationID_List.append(SubstationNameID['rdfid'])
 
-        #return SubstationNameIDs
         #print(self.SubstationNameID_Dict)
 
     def getTimeList(self, tableName):

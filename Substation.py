@@ -31,7 +31,7 @@ class Substation():
             #print((one_angle, one_voltage))
         return (one_angle, one_voltage)
 
-    #Get a list of voltage and angle of this substation, from time 1 to time 20
+    #Get a list of voltage and angle of this substation, from time 1 to time 200
     def VoltageAngleList(self, time_list):
         self.VoltageList = list()
         self.AngleList = list()

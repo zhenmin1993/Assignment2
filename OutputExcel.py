@@ -11,7 +11,6 @@ class OutputExcel():
 
     
     def WriteColumnName(self,ws):
-        #style0 = xlwt.easyxf('font: name Times New Roman, color-index black, bold on',num_format_str='#,##0.00')
         row_number = 0
         column_number = 0
         for SSname in self.SubstationNameList:
@@ -24,7 +23,6 @@ class OutputExcel():
 
 
     def WriteFile(self):
-        #style0 = xlwt.easyxf('font: name Times New Roman, color-index black, bold on',num_format_str='#,##0.00')
         ws = self.wb.add_sheet('VoltageAngle VS Class')
         self.WriteColumnName(ws)
         row_number = 1

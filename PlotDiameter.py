@@ -14,7 +14,6 @@ class PlotDiameter():
             for kValue in k_list:
                 if kValue == key_dia:
                     self.Diameter_list.append(value_dia)
-        #self.Diameter_dict = Diameter_dict
         #plt.figure(1)
 
 

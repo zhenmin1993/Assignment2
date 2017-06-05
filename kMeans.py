@@ -6,10 +6,6 @@ import copy
 class kMeans():
     def __init__(self, cluster_num, data_list, TrainingExample_num):
         self.cluster_num = cluster_num
-        #self.High_Load_Peak = data_list[0]
-        #self.Shut_Down_Generator = data_list[1]
-        #self.Low_Load_Night = data_list[2]
-        #self.Disconn_Line = data_list[3]
         self.average_point_list = list()
         self.assign_point_list = list()
         self.SubstationInstanceList = data_list
@@ -23,7 +19,6 @@ class kMeans():
         for iter_traning in range(self.TE_num):
             coord = list()
             for SubstationInstance in self.SubstationInstanceList:
-                #SubstationInstance.VoltageAngleList()
                 coord.append(SubstationInstance.VoltageList[iter_traning])
                 coord.append(SubstationInstance.AngleList[iter_traning])
 
@@ -92,14 +87,13 @@ class kMeans():
 
     #calculate the coordinate of centroids
     def avg_coordinate_calculate(self,coord, point_num):
-        avg_cord = list()
+        avg_coord = list()
         if point_num != 0:
             for iter_coord in range(len(coord)):
-                avg_cord.append(coord[iter_coord]/point_num) 
+                avg_coord.append(coord[iter_coord]/point_num) 
 
-            return avg_cord
-        #else:
-         #   return None
+            return avg_coord
+
 
     #A function to calculate the coordinate of centroids and update the centroids list (self.average_point_list)
     def new_average_point_list(self):
